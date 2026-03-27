@@ -1,0 +1,13 @@
+[general]
+imported=true
+script="res://scripts/core/GameController.gd"
+valid=true
+
+[script_variables]
+
+[deps]
+sources=["res://scripts/core/Block.gd", "res://scripts/managers/GameState.gd", "res://scripts/managers/SoundManager.gd"]
+resources=["res://assets/sprites/block_1.png", "res://assets/sprites/block_2.png", "res://assets/sprites/block_3.png", "res://assets/sprites/block_4.png", "res://assets/sprites/block_5.png", "res://assets/sprites/block_6.png"]
+
+[user]
+resource_type="Node2D"
