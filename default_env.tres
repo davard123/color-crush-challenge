@@ -1,0 +1,6 @@
+[gd_resource type="Environment" load_steps=2 format=3]
+
+[resource]
+resource_name = "Default Env"
+background_mode = 0
+bg_color = Color(0.0196078, 0.0196078, 0.0196078, 1)
