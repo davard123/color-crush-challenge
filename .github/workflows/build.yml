@@ -1,0 +1,58 @@
+name: Build and Export Godot Game
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Setup Godot
+      uses: chickensoft-space/setup-godot@v2
+      with:
+        godot-version: 3.5.2
+        export-templates: true
+
+    - name: Install Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'
+
+    - name: Setup GDExtension dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install gcc-multilib g++-multilib
+
+    - name: Export Game
+      run: |
+        godot -v --export "HTML5" ./export/index.html --no-window
+
+    - name: Upload Build Artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: html5-build
+        path: ./export/
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+
+    steps:
+    - name: Download artifact
+      uses: actions/download-artifact@v3
+      with:
+        name: html5-build
+        path: ./build
+
+    - name: Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./build
