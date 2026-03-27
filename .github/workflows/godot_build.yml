@@ -1,0 +1,54 @@
+name: Build Godot Game for Web
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Setup Godot
+      uses: chickensoft-space/setup-godot@v2
+      with:
+        godot-version: 3.5.2
+        export-templates: true
+
+    - name: Setup Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'
+
+    - name: Create export directory
+      run: mkdir -p export
+
+    - name: Export for Web
+      run: |
+        godot --export "HTML5" ./export/index.html --no-window
+        ls -la export/
+
+    - name: Upload Web Build
+      uses: actions/upload-pages-artifact@v1
+      with:
+        path: export/
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+
+    permissions:
+      pages: write
+      id-token: write
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v2
