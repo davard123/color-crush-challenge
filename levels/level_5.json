@@ -1,0 +1,30 @@
+{
+  "level": 5,
+  "goal": {
+    "type": "score",
+    "target": 500
+  },
+  "moves": 25,
+  "board_config": {
+    "width": 8,
+    "height": 8,
+    "special_blocks": [
+      {
+        "type": "rocket",
+        "position": [
+          3,
+          3
+        ]
+      },
+      {
+        "type": "bomb",
+        "position": [
+          5,
+          5
+        ]
+      }
+    ],
+    "obstacles": []
+  },
+  "theme": "default"
+}

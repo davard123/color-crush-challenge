@@ -1,0 +1,48 @@
+{
+  "level": 20,
+  "goal": {
+    "type": "clear_ice",
+    "target_count": 4
+  },
+  "moves": 30,
+  "board_config": {
+    "width": 8,
+    "height": 8,
+    "special_blocks": [],
+    "obstacles": [
+      {
+        "type": "ice",
+        "position": [
+          2,
+          2
+        ],
+        "health": 3
+      },
+      {
+        "type": "ice",
+        "position": [
+          4,
+          4
+        ],
+        "health": 3
+      },
+      {
+        "type": "ice",
+        "position": [
+          6,
+          6
+        ],
+        "health": 3
+      },
+      {
+        "type": "ice",
+        "position": [
+          1,
+          7
+        ],
+        "health": 3
+      }
+    ]
+  },
+  "theme": "winter"
+}
